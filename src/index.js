@@ -1,9 +1,13 @@
+import { fetchBreeds, fetchCatByBreed } from './cat-api';
+
 import axios from "axios";
 axios.defaults.headers.common["x-api-key"] = "live_xd33lTX2zvdVSyB3YyKR2QYVZp1oHQGnHVRKZ7iVFN4JovWqpFXg0PN0nVWBny4J";
 console.log(axios.isCancel('something'));
 
+
 const url = `https://api.thecatapi.com/v1/breeds`;
 const api_key = "live_xd33lTX2zvdVSyB3YyKR2QYVZp1oHQGnHVRKZ7iVFN4JovWqpFXg0PN0nVWBny4J"
+
 let storedBreeds = []
 
  fetch(url,{headers: {
@@ -33,7 +37,7 @@ document.querySelector('.breed-select').appendChild(option);
     
     }
    //show the first breed by default
-   showBreedImage(0)
+   showBreedImage[0]
 })
 .catch(function(error) {
    console.log(error);

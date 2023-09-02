@@ -1,15 +1,15 @@
 import axios from "axios";
 import { Notify } from "notiflix";
+
 const api_key = "live_xd33lTX2zvdVSyB3YyKR2QYVZp1oHQGnHVRKZ7iVFN4JovWqpFXg0PN0nVWBny4J"
 axios.defaults.headers.common["x-api-key"] = api_key;
 
+// api cat url
 const url = `https://api.thecatapi.com/v1`;
 
 
 function fetchBreeds() {
-    // GET / "https://api.thecatapi.com/v1/breeds"
-    // Accept: application/json
-
+// get api url breeds
     try {
     return axios.get(`${url}/breeds`).then(response => {
     console.log(response.data);
@@ -23,10 +23,9 @@ function fetchBreeds() {
 }
 
 function fetchCatByBreed(breedId) {
-    // GET / "https://api.thecatapi.com/v1/images/search?breed_ids=id"
-    // Accept: application/json
+    
     try {
-        // wywolanie obrazow po id
+// search images by id and return
         return axios.get(`${url}/images/search?breed_ids=${breedId}`).then(response => {
         console.log(response.data);
         return response.data;
@@ -34,8 +33,7 @@ function fetchCatByBreed(breedId) {
         }
         catch (error) {
             console.log(error);
-        }  
-    
+        }    
 }
 
 // export functions

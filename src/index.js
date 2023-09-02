@@ -1,8 +1,8 @@
 import { fetchBreeds, fetchCatByBreed } from './cat-api';
 import SlimSelect from 'slim-select';
-// jak wywalil sie css
+// when CSS failed 
 import 'slim-select/dist/slimselect.css';
-// only libraries I need
+// only libraries I need NOT ALL import! 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
@@ -12,12 +12,13 @@ const loader = document.querySelector(".loader");
 const error = document.querySelector(".error");
 const catInfo = document.querySelector(".cat-info");
 
-loader.classList.add(".hidden");
-error.classList.add(".hidden");
+// to hide loader and error html do it in CSS
+loader.classList.add("hidden");
+error.classList.add("hidden");
 
 const breedArr = [];
 
-// pobranie tablicy
+// fetch array
 fetchBreeds().then(response => {
 response.forEach(el => {
   // console.log(el);
@@ -28,7 +29,7 @@ response.forEach(el => {
 // cat list in browser added
 breedSelect.insertAdjacentHTML("beforeend", breedArr);
 
-// slimselect lib
+// slimselect library to select breed
 new SlimSelect({
   select: '.breed-select',
 });
@@ -37,8 +38,10 @@ new SlimSelect({
 
 
 breedSelect.addEventListener('change', selectCat);
+
 // selected Option function from doc
 function selectCat(event) {
+// notiflix loading
   Loading.pulse("Loading data...");
   const selectId = event.target.selectedOptions[0];
   console.log(selectId);
@@ -47,14 +50,14 @@ function selectCat(event) {
 fetchCatByBreed(selectId.value).then(response => {
 // fragm html print 
 catInfo.innerHTML = `
-      <div class="group-div">
-      <div>
-        <img src="${response[0].url}" alt="${response[0].breeds[0].name}" width="600"/>
+      <div class="box">
+      <div class="box__image">
+        <img src="${response[0].url}" alt="${response[0].breeds[0].name}"/>
       </div>
-      <div>
-        <h1 class="">${response[0].breeds[0].name}</h1>
-        <p>${response[0].breeds[0].description}</p>
-        <p><strong>Temperament:</strong> ${response[0].breeds[0].temperament}</p>
+      <div class="box__info">
+        <h1 class="box__info--headline">${response[0].breeds[0].name}</h1>
+        <p class="box__info--regular">${response[0].breeds[0].description}</p>
+        <p class="box__info--bolded"><strong>Temperament:</strong> <span class="box__info--regular">${response[0].breeds[0].temperament}</span></p>
       </div>
       </div>`;
       Loading.remove();
